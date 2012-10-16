@@ -8,10 +8,10 @@
 % // y_pixelcoord = (y_meters) * NUI_CAMERA_SKELETON_TO_DEPTH_IMAGE_MULTIPLIER_320x240 / z_meters + 120;
 % #define NUI_CAMERA_SKELETON_TO_DEPTH_IMAGE_MULTIPLIER_320x240 (NUI_CAMERA_DEPTH_NOMINAL_FOCAL_LENGTH_IN_PIXELS)
 
-path = 'view_2\';
+path = 'd:\soft\ActionDataSet\view_1\';
 txts = dir([path '*.txt']);
 skeleton_obj = [];
-for i = 1:length(txts)
+for i = 2300:length(txts)
     disp(['processing file: ' num2str(i)]);
     txt1 = fopen([path txts(i).name]);
     line = fgetl(txt1);
@@ -54,12 +54,12 @@ for i = 1:length(txts)
         rgb_coords(j,2) = mapimage(pixel_coords(j,2),pixel_coords(j,1),2);
         rgb_coords(j,1) = mapimage(pixel_coords(j,2),pixel_coords(j,1),3);
     end
-    %imshow(rgbimage);
+    imshow(rgbimage);
     %imshow(depthimage,[]);
-    %hold on;
-    %plot(rgb_coords(:,1),rgb_coords(:,2),'ro');
-    %plot(pixel_coords(:,1),240-pixel_coords(:,2),'ro');
-    %pause(0.1);
+    hold on;
+    plot(rgb_coords(:,1),rgb_coords(:,2),'ro');
+    plot(pixel_coords(:,1),240-pixel_coords(:,2),'ro');
+    pause(0.03);
     skeleton_obj(end).rgb_coords = rgb_coords;
     skeleton_obj(end).depth_coords = pixel_coords;
     skeleton_obj(end).framenum = framenum;
