@@ -119,5 +119,10 @@ Vx(reliab<thr) = 0;   Vy(reliab<thr) = 0;
 % show quiver plot on top of reliab
 if( show )
   figure(show); clf; im( I1 );
-  hold('on'); quiver( Vx, Vy, 0,'-b' ); hold('off');
+  step_size = 8;
+  [X, Y] = meshgrid(1:step_size:size(I1,2), 1:step_size:size(I1,1));
+  hold('on'); quiver(X, Y, Vx(1:step_size:size(I1,1), 1:step_size: ...
+                              size(I1,2)), Vy(1:step_size:size(I1,1), ...
+                                              1:step_size:size(I1,2)), ...
+                     0,'-b' ); hold('off');
 end
